@@ -10,9 +10,7 @@ export default function FoodCard({ img, name, price, description }) {
           <span>{price}$</span>
         </div>
         <p>{description}</p>
-        <div>
-          <Button text="Add to Cart" btnStyle="btn-bg" />
-        </div>
+        <Button text="Add to Cart" btnStyle="btn-bg" />
       </div>
     </li>
   );
