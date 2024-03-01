@@ -1,4 +1,5 @@
 import logo from "../assets/logo.jpg";
+import Button from "./ui/Button";
 
 export default function Header() {
   return (
@@ -9,7 +10,7 @@ export default function Header() {
       </div>
 
       <div id="cart">
-        <button>Cart</button>
+        <Button text={`Cart(${0})`} btnStyle="btn-cart" />
       </div>
     </header>
   );

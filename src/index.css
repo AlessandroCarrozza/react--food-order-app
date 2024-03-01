@@ -18,6 +18,34 @@ body {
   --main-col: #ffc404;
 }
 
+/* default rules */
+button {
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.2rem;
+}
+
+.btn {
+  background: none;
+}
+
+.btn-cart {
+  background: none;
+  color: var(--main-col);
+  font-size: 1.5rem;
+  padding-right: 2rem;
+}
+
+.btn-bg {
+  background-color: var(--main-col);
+}
+
+li {
+  list-style: none;
+}
+
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
@@ -43,6 +71,59 @@ header h1 {
   text-transform: uppercase;
   color: var(--main-col);
   padding: 0 1rem;
+}
+
+/* LIST */
+ul {
+  margin: auto;
+  max-width: 60rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+
+ul li {
+  width: calc(100% / 3 - 1rem);
+  margin: 0.5rem;
+}
+
+/* SINGLE CARD */
+li .food-img {
+  height: 14rem;
+  background-color: blue;
+}
+
+li .food-info * {
+  text-align: center;
+}
+
+li .food-info {
+  padding: 0 0.5rem 1rem;
+  background-color: #1d1a16;
+}
+
+li .price {
+  margin: auto;
+}
+
+li .price span {
+  display: inline-block;
+  background-color: #312c1d;
+  color: #ffc404;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+}
+
+li h3 {
+  margin: 0;
+  padding: 1rem 0;
+}
+
+li p {
+  font-size: 0.9rem;
 }
 
 /* h1 {
