@@ -1,21 +1,15 @@
 import Button from "../ui/Button";
 
-export default function FoodCard() {
+export default function FoodCard({ img, name, price, description }) {
   return (
     <li className="food-card">
-      <div className="food-img">
-        <img src="" alt="" />
-      </div>
+      <img src={`../../../backend/public/${img}`} alt="" />
       <div className="food-info">
-        <h3>Name Food</h3>
+        <h3>{name}</h3>
         <div className="price">
-          <span>22,44</span>
+          <span>{price}$</span>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
-          debitis quae laboriosam repellendus fugit voluptas eveniet dolorum
-          ullam.
-        </p>
+        <p>{description}</p>
         <div>
           <Button text="Add to Cart" btnStyle="btn-bg" />
         </div>

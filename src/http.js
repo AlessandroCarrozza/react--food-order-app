@@ -5,5 +5,5 @@ export async function fetchAvailableFood() {
   if (!response.ok) {
     throw new Error("Failed to fetch available food");
   }
-  return resData.meals;
+  return resData;
 }
