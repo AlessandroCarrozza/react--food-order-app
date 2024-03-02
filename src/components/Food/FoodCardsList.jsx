@@ -10,25 +10,30 @@ export default function FoodCardsList() {
 
   useEffect(() => {
     async function getAvailableFood() {
+      setIsFetching(true);
       try {
         const data = await fetchAvailableFood();
         console.log(data);
         setAvailableMeals(data);
       } catch (error) {
+        console.log(error.message);
         setError({
-          message: error.message || "Failed to fetch available food",
+          message: error.message,
         });
       }
+      setIsFetching(false);
     }
     getAvailableFood();
   }, []);
 
   return (
     <ul id="food-cards-list">
-      {/* here .map */}
+      {error ? <p>{error.message}</p> : ""}
+      {isFetching && <p>Download...</p>}
       {availableMeals.map((meal) => (
         <FoodCard
           key={meal.id}
+          meal={meal}
           img={meal.image}
           name={meal.name}
           price={meal.price}
