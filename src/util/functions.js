@@ -2,14 +2,15 @@
 export function updateMeal(array, meal, name, price) {
   const newMeal = array.reduce(
     (acc, obj) => {
+      console.log(obj.name);
       if (obj.name === meal.name) {
-        acc.quantity += 1;
+        acc.quantity += obj.quantity;
       }
       return acc;
     },
     {
       name: name,
-      price: price,
+      price: +price,
       quantity: 1,
     }
   );

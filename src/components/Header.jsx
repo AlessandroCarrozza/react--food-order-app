@@ -19,7 +19,7 @@ export default function Header() {
           <h1>reactfood</h1>
         </div>
 
-        <div id="cart">
+        <div>
           <Button
             onClick={() => handleOpenCartClick()}
             text={`Cart(${0})`}

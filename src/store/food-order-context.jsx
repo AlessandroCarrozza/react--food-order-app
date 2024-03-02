@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { updateMeal } from "../util/functions";
 
 export const OrderContext = createContext({
   cartCtx: [],
@@ -7,37 +8,18 @@ export const OrderContext = createContext({
 
 export default function OrderContextProvider({ children }) {
   const [cart, setCart] = useState([]);
-  // function addToCart(meal) {
-  //   const { name, price } = meal;
-  //   setCart((prevMeals) => [
-  //     ...prevMeals,
-  //     { name: name, price: price, quantity: 1 },
-  //   ]);
-  // }
   function addToCart(meal) {
     const { name, price } = meal;
-    const newMeal = cart.reduce(
-      (acc, obj) => {
-        console.log(obj.name);
-        if (obj.name === meal.name) {
-          acc.quantity += obj.quantity;
-          acc.price += obj.price;
-        }
-        return acc;
-      },
-      {
-        name: name,
-        price: +price,
-        quantity: 1,
-      }
-    );
-    console.log(newMeal);
+    const newMeal = updateMeal(cart, meal, name, price); // reduce function imported
     setCart((prevMeals) => {
+      // remove multiple objects meal with filter
       const updatedMeals = prevMeals.filter(
         (prevMeal) => prevMeal.name !== newMeal.name
       );
-      console.log(updatedMeals);
-      return [...updatedMeals, newMeal];
+      return [
+        ...updatedMeals,
+        { ...newMeal, price: newMeal.quantity * newMeal.price },
+      ];
     });
   }
   console.log(cart);

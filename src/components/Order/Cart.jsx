@@ -1,13 +1,26 @@
 import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
+import Button from "../ui/Button";
 
 export default function Cart() {
-  const { cartCtx } = useContext(OrderContext);
+  const { cartCtx, addToCartCtx } = useContext(OrderContext);
   return (
-    <ul>
-      {/* {cartCtx.map((meal) => (
-        <li key={meal.name}>{meal.name}</li>
-      ))} */}
-    </ul>
+    <div id="cart">
+      <h2>Your Cart</h2>
+      <ul id="cart-list">
+        {cartCtx.map((meal) => (
+          <li className="cart-row" key={meal.name}>
+            <span>
+              {meal.name}-{meal.quantity}-${+meal.price.toFixed(2)}
+            </span>
+            <div className="plus-minus">
+              <Button text="+" onClick={() => addToCartCtx(meal)} />
+              <span>{meal.quantity}</span>
+              <Button text="-" />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

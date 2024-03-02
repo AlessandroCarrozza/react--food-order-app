@@ -74,7 +74,7 @@ header h1 {
 }
 
 /* LIST */
-ul {
+#food-cards-list {
   margin: auto;
   max-width: 60rem;
   display: flex;
@@ -85,7 +85,7 @@ ul {
 
 /* SINGLE CARD */
 
-ul .food-card {
+#food-cards-list .food-card {
   width: calc(100% / 3 - 1rem);
   height: 30rem;
   margin: 0.5rem;
@@ -141,6 +141,21 @@ ul .food-card {
   bottom: 1rem;
   left: 50%;
   transform: translate(-50%, 0);
+}
+
+/* CART */
+#cart {
+  width: 30rem;
+}
+
+#cart-list {
+  padding: 0;
+}
+
+#cart-list .cart-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* h1 {
