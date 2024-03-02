@@ -14,7 +14,7 @@ export default function FoodCard({ img, name, price, description, meal }) {
         </div>
         <p>{description}</p>
         <Button
-          // onClick={addToCartCtx(meal)}
+          onClick={() => addToCartCtx(meal)}
           text="Add to Cart"
           btnStyle="btn-bg"
         />
