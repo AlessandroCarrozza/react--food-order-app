@@ -1,18 +1,47 @@
 import { createContext, useState } from "react";
 
-export const OrderContext = createContext({ addToCartCtx: () => {} });
+export const OrderContext = createContext({
+  cartCtx: [],
+  addToCartCtx: () => {},
+});
 
 export default function OrderContextProvider({ children }) {
   const [cart, setCart] = useState([]);
+  // function addToCart(meal) {
+  //   const { name, price } = meal;
+  //   setCart((prevMeals) => [
+  //     ...prevMeals,
+  //     { name: name, price: price, quantity: 1 },
+  //   ]);
+  // }
   function addToCart(meal) {
     const { name, price } = meal;
-    setCart((prevMeals) => [
-      ...prevMeals,
-      { name: name, price: price, quantity: 1 },
-    ]);
+    const num = 
+    const newMeal = cart.reduce(
+      (acc, obj) => {
+        console.log(obj.name);
+        if (obj.name === meal.name) {
+          acc.quantity += 1;
+        }
+        return acc;
+      },
+      {
+        name: name,
+        price: price,
+        quantity: num,
+      }
+    );
+    console.log(newMeal);
+    setCart((prevMeals) => {
+      const updatedMeals = prevMeals.filter(
+        (prevMeal) => prevMeal.name !== newMeal.name
+      );
+      return [...updatedMeals, newMeal];
+    });
   }
   console.log(cart);
   const ctxValue = {
+    cartCtx: cart,
     addToCartCtx: addToCart,
   };
   return (
