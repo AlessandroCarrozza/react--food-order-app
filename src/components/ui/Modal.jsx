@@ -21,8 +21,7 @@ const Modal = forwardRef(function Modal({}, ref) {
 
   return createPortal(
     <dialog id="modal" ref={dialog}>
-      {isOrderForm ? <OrderForm /> : <Cart />}
-      <Button text="Close" onClick={() => closeModal()} />
+      {isOrderForm ? <OrderForm /> : <Cart onClose={closeModal} />}
     </dialog>,
     document.getElementById("modal")
   );

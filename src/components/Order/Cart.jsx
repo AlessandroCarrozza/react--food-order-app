@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 
-export default function Cart() {
+export default function Cart({ onClose }) {
   const { cartCtx, addToCartCtx } = useContext(OrderContext);
   return (
     <div id="cart">
@@ -21,6 +21,14 @@ export default function Cart() {
           </li>
         ))}
       </ul>
+      <div>
+        <Button text="Close" onClick={() => onClose()} />
+        <Button
+          text="Go to Checkout"
+          btnStyle="btn-bg"
+          onClick={() => onClose()}
+        />
+      </div>
     </div>
   );
 }

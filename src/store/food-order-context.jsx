@@ -11,6 +11,7 @@ export const OrderContext = createContext({
 export default function OrderContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [cart, setCart] = useState([]);
+
   function addToCart(meal) {
     const { name, price } = meal;
     const newMeal = updateMeal(cart, availableMeals, name, price); // reduce function imported
@@ -22,7 +23,9 @@ export default function OrderContextProvider({ children }) {
       return [...updatedMeals, { ...newMeal }];
     });
   }
+
   console.log(cart);
+
   const ctxValue = {
     availableMealsCtx: availableMeals,
     setAvailableMealsCtx: setAvailableMeals,
