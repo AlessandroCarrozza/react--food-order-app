@@ -33,9 +33,9 @@ export default function OrderContextProvider({ children }) {
     );
     console.log(newMeal);
     setCart((prevMeals) => {
-      const updatedMeals = prevMeals.filter((prevMeal) => {
-        prevMeal.name !== newMeal.name;
-      });
+      const updatedMeals = prevMeals.filter(
+        (prevMeal) => prevMeal.name !== newMeal.name
+      );
       console.log(updatedMeals);
       return [...updatedMeals, newMeal];
     });
