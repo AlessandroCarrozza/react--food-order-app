@@ -4,10 +4,11 @@ export const OrderContext = createContext({ addToCartCtx: () => {} });
 
 export default function OrderContextProvider({ children }) {
   const [cart, setCart] = useState([]);
-  function addToCart(newMeal) {
+  function addToCart(meal) {
+    const { name, price } = meal;
     setCart((prevMeals) => [
       ...prevMeals,
-      { name: newMeal.name, price: newMeal.price, quantity: 1 },
+      { name: name, price: price, quantity: 1 },
     ]);
   }
   console.log(cart);
