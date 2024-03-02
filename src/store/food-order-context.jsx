@@ -16,26 +16,27 @@ export default function OrderContextProvider({ children }) {
   // }
   function addToCart(meal) {
     const { name, price } = meal;
-    const num = 
     const newMeal = cart.reduce(
       (acc, obj) => {
         console.log(obj.name);
         if (obj.name === meal.name) {
-          acc.quantity += 1;
+          acc.quantity += obj.quantity;
+          acc.price += obj.price;
         }
         return acc;
       },
       {
         name: name,
-        price: price,
-        quantity: num,
+        price: +price,
+        quantity: 1,
       }
     );
     console.log(newMeal);
     setCart((prevMeals) => {
-      const updatedMeals = prevMeals.filter(
-        (prevMeal) => prevMeal.name !== newMeal.name
-      );
+      const updatedMeals = prevMeals.filter((prevMeal) => {
+        prevMeal.name !== newMeal.name;
+      });
+      console.log(updatedMeals);
       return [...updatedMeals, newMeal];
     });
   }
