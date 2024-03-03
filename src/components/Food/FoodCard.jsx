@@ -1,10 +1,11 @@
 import { OrderContext } from "../../store/food-order-context";
+import { findMeal } from "../../util/functions";
 import Button from "../ui/Button";
 import { useContext } from "react";
 
 export default function FoodCard({ meal, img }) {
   const { addToCartCtx, cartCtx } = useContext(OrderContext);
-  const foundMeal = cartCtx.find((singleMeal) => singleMeal.name === meal.name);
+  const foundMeal = findMeal(cartCtx, meal.name);
   const cartMeal = foundMeal === undefined ? meal : foundMeal;
   return (
     <li className="food-card">

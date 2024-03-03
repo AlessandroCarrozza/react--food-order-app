@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
-import { filterMeals } from "../../util/functions";
+import { filterMeals, findMeal } from "../../util/functions";
 
 export default function Cart({ onClose }) {
   const { cartCtx, addToCartCtx, setCartCtx, availableMealsCtx } =
@@ -12,16 +12,14 @@ export default function Cart({ onClose }) {
   function removeFromCart(meal) {
     setCartCtx((prevMeals) => {
       let updatedMeals = [];
-      if (meal.quantity === 1) {
+      if (meal.quantity <= 1) {
         // filter meals
         updatedMeals = filterMeals(prevMeals, meal);
       } else {
         // filter meals and reducing 1 from quantity
         const { name, price, quantity } = meal;
         const filteredMeals = filterMeals(prevMeals, meal);
-        const foundMeal = availableMealsCtx.find(
-          (singleMeal) => singleMeal.name === name
-        );
+        const foundMeal = findMeal(availableMealsCtx, name);
         updatedMeals = [
           ...filteredMeals,
           {

@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from "react";
-import { updateMeal } from "../util/functions";
+import { createContext, useState } from "react";
+import { filterMeals, updateMeal } from "../util/functions";
 
 export const OrderContext = createContext({
   availableMealsCtx: [],
@@ -14,13 +14,10 @@ export default function OrderContextProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   function addToCart(meal) {
-    const { name, price } = meal;
-    const newMeal = updateMeal(cart, availableMeals, name, price); // reduce function imported
+    const newMeal = updateMeal(cart, availableMeals, meal); // reduce function imported
     setCart((prevMeals) => {
       // remove multiple objects meal with filter
-      const updatedMeals = prevMeals.filter(
-        (prevMeal) => prevMeal.name !== newMeal.name
-      );
+      const updatedMeals = filterMeals(prevMeals, newMeal);
       return [...updatedMeals, { ...newMeal }];
     });
   }
