@@ -1,16 +1,29 @@
 import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
+import { filterMeals } from "../../util/functions";
 
 export default function Cart({ onClose }) {
   const { cartCtx, addToCartCtx, setCartCtx } = useContext(OrderContext);
-  // const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
+  const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
+
+  // remove meal function
   function removeFromCart(meal) {
     setCartCtx((prevMeals) => {
-      const updatedMeals = prevMeals.filter(
-        (prevMeal) => prevMeal.name !== meal.name
-      );
-      return { ...updatedMeals };
+      let updatedMeals = [];
+      if (meal.quantity === 1) {
+        // filter meals
+        updatedMeals = filterMeals(prevMeals, meal);
+      } else {
+        // filter meals and reducing 1 from quantity
+        const { name, price, quantity } = meal;
+        const filteredMeals = filterMeals(prevMeals, meal);
+        updatedMeals = [
+          ...filteredMeals,
+          { name: name, price: +price, quantity: +(quantity - 1) },
+        ];
+      }
+      return [...updatedMeals];
     });
   }
   return (
@@ -35,7 +48,7 @@ export default function Cart({ onClose }) {
         ))}
       </ul>
 
-      {/* <div className="totPrice">${totPrice.toFixed(2)}</div> */}
+      <div className="totPrice">${totPrice.toFixed(2)}</div>
 
       <div className="cart-buttons">
         <Button text="Close" onClick={() => onClose()} />

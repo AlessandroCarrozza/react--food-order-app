@@ -23,3 +23,8 @@ export function updateMeal(array, availablesArray, name, initialPrice) {
   );
   return newMeal;
 }
+
+export function filterMeals(array, meal) {
+  const filteredMeals = array.filter((prevMeal) => prevMeal.name !== meal.name);
+  return filteredMeals;
+}
