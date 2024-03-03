@@ -6,13 +6,13 @@ export default function OrderForm({ onClose }) {
     <div id="order-form">
       <h1>Checkout</h1>
       <div>Total Amount: ${100}</div>
-      <Input />
-      <Input />
-      <Input />
+      <Input label="Full Name" />
+      <Input label="E-Email Address" type="email" />
+      <Input label="Street" />
 
       <div>
-        <Input inpStyle="user-detail short" />
-        <Input inpStyle="user-detail short" />
+        <Input inpStyle="user-detail short" label="Postal Code" type="num" />
+        <Input inpStyle="user-detail short" label="City" />
       </div>
 
       <div className="cart-buttons">

@@ -6,7 +6,7 @@ export default function Input({
   return (
     <div className={inpStyle}>
       <label>{label}</label>
-      <input type={type} />
+      <input placeholder="Type here..." type={type} />
     </div>
   );
 }
