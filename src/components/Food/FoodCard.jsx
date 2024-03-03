@@ -2,19 +2,21 @@ import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import { useContext } from "react";
 
-export default function FoodCard({ img, name, price, description, meal }) {
-  const { addToCartCtx } = useContext(OrderContext);
+export default function FoodCard({ meal, img }) {
+  const { addToCartCtx, cartCtx } = useContext(OrderContext);
+  const foundMeal = cartCtx.find((singleMeal) => singleMeal.name === meal.name);
+  const cartMeal = foundMeal === undefined ? meal : foundMeal;
   return (
     <li className="food-card">
-      <img src={`../../../backend/public/${img}`} alt="" />
+      <img src={`../../../backend/public/${img}`} alt={meal.name} />
       <div className="food-info">
-        <h3>{name}</h3>
+        <h3>{meal.name}</h3>
         <div className="price">
-          <span>${price}</span>
+          <span>${meal.price}</span>
         </div>
-        <p>{description}</p>
+        <p>{meal.description}</p>
         <Button
-          onClick={() => addToCartCtx(meal)}
+          onClick={() => addToCartCtx(cartMeal)}
           text="Add to Cart"
           btnStyle="btn-bg"
         />

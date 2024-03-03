@@ -33,14 +33,7 @@ export default function FoodCardsList() {
       {error ? <p>{error.message}</p> : ""}
       {isFetching && <p>Download...</p>}
       {availableMealsCtx.map((meal) => (
-        <FoodCard
-          key={meal.id}
-          meal={meal}
-          img={meal.image}
-          name={meal.name}
-          price={meal.price}
-          description={meal.description}
-        />
+        <FoodCard key={meal.id} meal={meal} img={meal.image} />
       ))}
     </ul>
   );
