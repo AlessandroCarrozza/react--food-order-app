@@ -1,7 +1,7 @@
 import logo from "../assets/logo.jpg";
 import Button from "./ui/Button";
 import { useContext, useRef } from "react";
-import Modal from "./ui/Modal";
+import Modal from "./Order/Modal";
 import { OrderContext } from "../store/food-order-context";
 
 export default function Header() {

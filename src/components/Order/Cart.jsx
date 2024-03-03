@@ -3,9 +3,8 @@ import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import CartItem from "./CartItem";
 
-export default function Cart({ onClose }) {
+export default function Cart({ onClose, totPrice, onForm }) {
   const { cartCtx } = useContext(OrderContext);
-  const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
 
   // alphabetic sorted x name
   const sortedCartMeals = cartCtx.sort((a, b) => a.name.localeCompare(b.name));
@@ -21,11 +20,17 @@ export default function Cart({ onClose }) {
         ))}
       </ul>
 
-      <div className="totPrice">${totPrice.toFixed(2)}</div>
+      <div className="totPrice">${totPrice}</div>
 
       <div className="cart-buttons">
-        <Button text="Close" onClick={() => onClose()} />
-        <Button text="Go to Checkout" btnStyle="btn-bg" />
+        <Button onClick={() => onClose()} text="Close" />
+        {cartCtx.length > 0 && (
+          <Button
+            onClick={() => onForm(true)}
+            text="Go to Checkout"
+            btnStyle="btn-bg"
+          />
+        )}
       </div>
     </div>
   );

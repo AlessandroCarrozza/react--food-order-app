@@ -53,6 +53,13 @@ button {
   background-color: var(--main-col);
 }
 
+.btn-back {
+  position: absolute;
+  background: none;
+  right: 0;
+  font-size: 1.5rem;
+}
+
 li {
   list-style: none;
 }
@@ -157,6 +164,7 @@ header h1 {
 
 /* MODAL  */
 .modal {
+  position: relative;
   background-color: #e4ddd4;
   border-radius: 6px;
   border: none;
