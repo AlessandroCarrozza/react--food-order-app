@@ -18,7 +18,7 @@ body {
   --main-col: #ffc404;
 }
 
-/* default rules */
+/* BUTTONS */
 button {
   border: none;
   cursor: pointer;
@@ -35,6 +35,18 @@ button {
   color: var(--main-col);
   font-size: 1.5rem;
   padding-right: 2rem;
+}
+
+.plus-minus button div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: black;
+  border-radius: 50%;
+  color: var(--main-col);
 }
 
 .btn-bg {
@@ -144,9 +156,6 @@ header h1 {
 }
 
 /* CART */
-#cart {
-  width: 30rem;
-}
 
 #cart-list {
   padding: 0;
@@ -156,6 +165,33 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.totPrice {
+  text-align: right;
+  font-weight: 800;
+  font-size: 1.2rem;
+  padding-bottom: 1rem;
+}
+
+.cart-buttons {
+  text-align: right;
+}
+
+/* MODAL  */
+.modal {
+  background-color: #e4ddd4;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+  width: 80%;
+  max-width: 40rem;
+  animation: fade-slide-up 0.3s ease-out forwards;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
 }
 
 /* h1 {

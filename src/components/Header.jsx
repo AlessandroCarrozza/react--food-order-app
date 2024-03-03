@@ -1,10 +1,11 @@
 import logo from "../assets/logo.jpg";
 import Button from "./ui/Button";
-import Cart from "./Order/Cart";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import Modal from "./ui/Modal";
+import { OrderContext } from "../store/food-order-context";
 
 export default function Header() {
+  const { cartCtx } = useContext(OrderContext);
   const dialog = useRef();
   function handleOpenCartClick() {
     console.log("open modal");
@@ -22,7 +23,7 @@ export default function Header() {
         <div>
           <Button
             onClick={() => handleOpenCartClick()}
-            text={`Cart(${0})`}
+            text={`Cart(${cartCtx.length})`}
             btnStyle="btn-cart"
           />
         </div>

@@ -20,7 +20,7 @@ const Modal = forwardRef(function Modal({}, ref) {
   }
 
   return createPortal(
-    <dialog id="modal" ref={dialog}>
+    <dialog className="modal" ref={dialog}>
       {isOrderForm ? <OrderForm /> : <Cart onClose={closeModal} />}
     </dialog>,
     document.getElementById("modal")

@@ -10,7 +10,7 @@ export default function FoodCard({ img, name, price, description, meal }) {
       <div className="food-info">
         <h3>{name}</h3>
         <div className="price">
-          <span>{price}$</span>
+          <span>${price}</span>
         </div>
         <p>{description}</p>
         <Button

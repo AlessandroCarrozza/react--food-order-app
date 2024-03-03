@@ -6,6 +6,7 @@ export const OrderContext = createContext({
   setAvailableMealsCtx: () => {},
   cartCtx: [],
   addToCartCtx: () => {},
+  setCartCtx: () => {},
 });
 
 export default function OrderContextProvider({ children }) {
@@ -31,6 +32,7 @@ export default function OrderContextProvider({ children }) {
     setAvailableMealsCtx: setAvailableMeals,
     cartCtx: cart,
     addToCartCtx: addToCart,
+    setCartCtx: setCart,
   };
   return (
     <OrderContext.Provider value={ctxValue}>{children}</OrderContext.Provider>
