@@ -7,6 +7,12 @@ import { OrderContext } from "../store/food-order-context";
 export default function Header() {
   const { cartCtx } = useContext(OrderContext);
   const dialog = useRef();
+
+  const totQuantity = cartCtx.reduce((acc, obj) => {
+    acc += obj.quantity;
+    return acc;
+  }, 0);
+
   function handleOpenCartClick() {
     console.log("open modal");
     dialog.current.open();
@@ -23,7 +29,7 @@ export default function Header() {
         <div>
           <Button
             onClick={() => handleOpenCartClick()}
-            text={`Cart(${cartCtx.length})`}
+            text={`Cart(${totQuantity})`}
             btnStyle="btn-cart"
           />
         </div>

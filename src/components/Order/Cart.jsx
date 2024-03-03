@@ -1,56 +1,19 @@
 import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
-import { filterMeals, findMeal } from "../../util/functions";
+import CartItem from "./CartItem";
 
 export default function Cart({ onClose }) {
-  const { cartCtx, addToCartCtx, setCartCtx, availableMealsCtx } =
-    useContext(OrderContext);
+  const { cartCtx } = useContext(OrderContext);
   const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
 
-  // remove meal function
-  function removeFromCart(meal) {
-    setCartCtx((prevMeals) => {
-      let updatedMeals = [];
-      if (meal.quantity <= 1) {
-        // filter meals
-        updatedMeals = filterMeals(prevMeals, meal);
-      } else {
-        // filter meals and reducing 1 from quantity
-        const { name, price, quantity } = meal;
-        const filteredMeals = filterMeals(prevMeals, meal);
-        const foundMeal = findMeal(availableMealsCtx, name);
-        updatedMeals = [
-          ...filteredMeals,
-          {
-            name: name,
-            price: +(price - foundMeal.price),
-            quantity: +(quantity - 1),
-          },
-        ];
-      }
-      return [...updatedMeals];
-    });
-  }
   return (
     <div id="cart">
       <h2>Your Cart</h2>
       {/* ordering meals list */}
       <ul id="cart-list">
         {cartCtx.map((meal) => (
-          <li className="cart-row" key={meal.name}>
-            <span>
-              {meal.name} - {meal.quantity} x ${+meal.price.toFixed(2)}
-            </span>
-            <div className="plus-minus">
-              <Button text={<div>+</div>} onClick={() => addToCartCtx(meal)} />
-              <span>{meal.quantity}</span>
-              <Button
-                text={<div>-</div>}
-                onClick={() => removeFromCart(meal)}
-              />
-            </div>
-          </li>
+          <CartItem key={meal.name} meal={meal} />
         ))}
       </ul>
 

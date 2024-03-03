@@ -3,7 +3,7 @@ import { findMeal } from "../../util/functions";
 import Button from "../ui/Button";
 import { useContext } from "react";
 
-export default function FoodCard({ meal, img }) {
+export default function MealCard({ meal, img }) {
   const { addToCartCtx, cartCtx } = useContext(OrderContext);
   const foundMeal = findMeal(cartCtx, meal.name);
   const cartMeal = foundMeal === undefined ? meal : foundMeal;
