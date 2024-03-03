@@ -7,12 +7,16 @@ export default function Cart({ onClose }) {
   const { cartCtx } = useContext(OrderContext);
   const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
 
+  // alphabetic sorted x name
+  const sortedCartMeals = cartCtx.sort((a, b) => a.name.localeCompare(b.name));
+  // console.log(sortedCartMeals);
+
   return (
     <div id="cart">
       <h2>Your Cart</h2>
       {/* ordering meals list */}
       <ul id="cart-list">
-        {cartCtx.map((meal) => (
+        {sortedCartMeals.map((meal) => (
           <CartItem key={meal.name} meal={meal} />
         ))}
       </ul>
@@ -21,11 +25,7 @@ export default function Cart({ onClose }) {
 
       <div className="cart-buttons">
         <Button text="Close" onClick={() => onClose()} />
-        <Button
-          text="Go to Checkout"
-          btnStyle="btn-bg"
-          onClick={() => onClose()}
-        />
+        <Button text="Go to Checkout" btnStyle="btn-bg" />
       </div>
     </div>
   );
