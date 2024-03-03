@@ -4,7 +4,8 @@ import Button from "../ui/Button";
 import { filterMeals } from "../../util/functions";
 
 export default function Cart({ onClose }) {
-  const { cartCtx, addToCartCtx, setCartCtx } = useContext(OrderContext);
+  const { cartCtx, addToCartCtx, setCartCtx, availableMealsCtx } =
+    useContext(OrderContext);
   const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0);
 
   // remove meal function
@@ -18,9 +19,16 @@ export default function Cart({ onClose }) {
         // filter meals and reducing 1 from quantity
         const { name, price, quantity } = meal;
         const filteredMeals = filterMeals(prevMeals, meal);
+        const foundMeal = availableMealsCtx.find(
+          (singleMeal) => singleMeal.name === name
+        );
         updatedMeals = [
           ...filteredMeals,
-          { name: name, price: +price, quantity: +(quantity - 1) },
+          {
+            name: name,
+            price: +(price - foundMeal.price),
+            quantity: +(quantity - 1),
+          },
         ];
       }
       return [...updatedMeals];

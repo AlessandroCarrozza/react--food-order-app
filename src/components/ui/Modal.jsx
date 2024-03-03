@@ -2,7 +2,6 @@ import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import Cart from "../Order/Cart";
 import OrderForm from "../Order/OrderForm";
-import Button from "./Button";
 
 const Modal = forwardRef(function Modal({}, ref) {
   const [isOrderForm, setIsOrderForm] = useState(false);
