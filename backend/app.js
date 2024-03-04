@@ -24,6 +24,15 @@ app.get("/meals", async (req, res) => {
   }
 });
 
+app.get("/orders", async (req, res) => {
+  try {
+    const orders = await fs.readFile("./data/orders.json", "utf8");
+    res.json(JSON.parse(orders));
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 app.post("/orders", async (req, res) => {
   const orderData = req.body.order;
 
@@ -70,15 +79,6 @@ app.use((req, res) => {
   }
 
   res.status(404).json({ message: "Not found" });
-});
-
-app.get("/orders", async (req, res) => {
-  try {
-    const orders = await fs.readFile("./data/orders.json", "utf8");
-    res.json(JSON.parse(orders));
-  } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
-  }
 });
 
 app.listen(3000);
