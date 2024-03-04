@@ -3,6 +3,7 @@ import { fetchAvailableFood } from "../../http";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { OrderContext } from "../../store/food-order-context";
+import OrdersHistory from "../OrdersHistory";
 
 export default function MealsCardsList() {
   // context
@@ -34,12 +35,15 @@ export default function MealsCardsList() {
   }, []);
 
   return (
-    <ul id="food-cards-list">
-      {errorCtx ? <p>{errorCtx.message}</p> : ""}
-      {isFetchingCtx && <p>Loading...</p>}
-      {availableMealsCtx.map((meal) => (
-        <MealCard key={meal.id} meal={meal} img={meal.image} />
-      ))}
-    </ul>
+    <>
+      <OrdersHistory />
+      <ul id="food-cards-list">
+        {errorCtx ? <p>{errorCtx.message}</p> : ""}
+        {isFetchingCtx && <p>Loading...</p>}
+        {availableMealsCtx.map((meal) => (
+          <MealCard key={meal.id} meal={meal} img={meal.image} />
+        ))}
+      </ul>
+    </>
   );
 }

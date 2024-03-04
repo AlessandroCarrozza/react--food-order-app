@@ -8,6 +8,16 @@ export async function fetchAvailableFood() {
   return resData;
 }
 
+export async function fetchOrdersHistory() {
+  const response = await fetch("http://localhost:3000/orders");
+  const resData = await response.json();
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch orders history");
+  }
+  return resData;
+}
+
 export async function sendUserOrder(order) {
   const response = await fetch("http://localhost:3000/orders", {
     method: "POST",
