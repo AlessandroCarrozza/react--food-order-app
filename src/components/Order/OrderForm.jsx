@@ -5,10 +5,27 @@ import Input from "../ui/Input";
 export default function OrderForm({ onClose, totPrice, onForm }) {
   const [userDetails, setUserDetails] = useState({});
 
-  function getUserDetails() {}
+  const fullName = useRef();
+  const email = useRef();
+  const street = useRef();
+  const postalCode = useRef();
+  const city = useRef();
+
+  function getUserDetails(event) {
+    // console.log(event);
+    event.preventDefault();
+    setUserDetails({
+      fullName: fullName.current.value,
+      email: email.current.value,
+      street: street.current.value,
+      postalCode: postalCode.current.value,
+      city: city.current.value,
+    });
+  }
+  console.log(userDetails);
 
   return (
-    <form id="order-form">
+    <form id="order-form" onSubmit={getUserDetails}>
       <Button
         onClick={() => {
           onForm(false);
@@ -18,20 +35,22 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       />
       <h1>Checkout</h1>
       <div>Total Amount: ${totPrice}</div>
-      <Input label="Full Name" name="fullName" />
-      <Input label="E-Email Address" type="email" name="email" />
-      <Input label="Street" name="street" />
 
+      {/* inputs */}
+      <Input ref={fullName} label="Full Name" />
+      <Input ref={email} label="E-Email Address" type="email" />
+      <Input ref={street} label="Street" />
       <div>
         <Input
+          ref={postalCode}
           inpStyle="user-detail short"
           label="Postal Code"
-          type="num"
           name="postalCode"
         />
-        <Input inpStyle="user-detail short" label="City" name="city" />
+        <Input ref={city} inpStyle="user-detail short" label="City" />
       </div>
 
+      {/* buttons actions */}
       <div className="cart-buttons">
         <Button
           text="Close"
