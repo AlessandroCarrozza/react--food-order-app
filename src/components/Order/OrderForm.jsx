@@ -5,7 +5,14 @@ import { OrderContext } from "../../store/food-order-context";
 import { sendUserOrder } from "../../http";
 
 export default function OrderForm({ onClose, totPrice, onForm }) {
-  const { cartCtx, setErrorCtx } = useContext(OrderContext);
+  const {
+    cartCtx,
+    setCartCtx,
+    errorCtx,
+    setErrorCtx,
+    setIsFetchingCtx,
+    isFetchingCtx,
+  } = useContext(OrderContext);
 
   const fullName = useRef();
   const email = useRef();
@@ -24,8 +31,10 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
         "postal-code": postalCode.current.value,
         city: city.current.value,
       },
+      totPrice: totPrice,
     };
     console.log(orderDatas);
+    setIsFetchingCtx(true);
     try {
       await sendUserOrder(orderDatas);
     } catch (error) {
@@ -33,10 +42,16 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
         message: error.message || "Failed to send order",
       });
     }
+    setIsFetchingCtx(false);
+    onForm(false);
+    setCartCtx([]);
+    onClose();
   }
 
   return (
     <form id="order-form" onSubmit={handleSubmitOrder}>
+      {isFetchingCtx ? "Loading" : ""}
+      {errorCtx ? errorCtx.message : ""}
       <Button
         onClick={() => {
           onForm(false);
