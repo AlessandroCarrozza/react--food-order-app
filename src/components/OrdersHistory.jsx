@@ -24,13 +24,13 @@ export default function OrdersHistory() {
   }, [fetchOrdersHistory]);
   console.log(ordersHistory);
   return (
-    <div>
+    <div id="history">
       <Button
         text="Back to meals"
         btnStyle="btn-bg"
         onClick={() => setIsHistoryCtx(false)}
       />
-      {ordersHistory !== undefined
+      {/* {ordersHistory !== undefined
         ? ordersHistory.map((order) => (
             <ul key={order.id}>
               <li>{order.customer.name}</li>
@@ -44,7 +44,31 @@ export default function OrdersHistory() {
               <li>${order.totPrice}</li>
             </ul>
           ))
-        : "no results"}
+        : "no results"} */}
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Email</th>
+            <th>Meals</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ordersHistory !== undefined
+            ? ordersHistory.map((order) => (
+                <tr key={order.id} className="row">
+                  <td>200398</td>
+                  <td>iPhone X 64Gb Grey</td>
+                  <td>$999.00</td>
+                  <td>1</td>
+                  <td>$999.00</td>
+                </tr>
+              ))
+            : "no results"}
+        </tbody>
+      </table>
     </div>
   );
 }

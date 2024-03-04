@@ -250,6 +250,41 @@ header h1 {
   text-align: right;
 }
 
+/* TABLE */
+#history {
+  max-width: 60rem;
+  margin: auto;
+}
+
+table {
+  margin: 1rem auto;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table thead {
+  background-color: #362f4b;
+}
+
+table th {
+  padding: 1.2rem;
+}
+
+table td {
+  color: black;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Stilizzare le righe pari */
+tr.row:nth-child(even) {
+  background-color: #f2f2f2; /* Grigio chiaro */
+}
+
+/* Stilizzare le righe dispari */
+tr.row:nth-child(odd) {
+  background-color: #ffffff; /* Bianco */
+}
 /* h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;
