@@ -18,6 +18,10 @@ body {
   --main-col: #ffc404;
 }
 
+.mb {
+  margin: 0.5rem;
+}
+
 /* BUTTONS */
 button {
   border: none;
@@ -56,6 +60,12 @@ button {
 .btn-back {
   background: none;
   font-size: 1.5rem;
+}
+
+button:disabled {
+  /* Stili per il bottone disabilitato */
+  color: #666666; /* Grigio scuro */
+  cursor: not-allowed; /* Cambia il cursore per indicare che l'azione non è permessa */
 }
 
 li {
@@ -256,8 +266,16 @@ header h1 {
   margin: auto;
 }
 
+#history p {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.5rem;
+  border: 1px solid #362f4b;
+  margin: 0;
+}
+
 table {
-  margin: 1rem auto;
+  margin: 0 auto 1rem;
   border-collapse: collapse;
   width: 100%;
 }

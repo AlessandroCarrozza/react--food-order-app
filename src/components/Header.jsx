@@ -5,7 +5,7 @@ import Modal from "./Order/Modal";
 import { OrderContext } from "../store/food-order-context";
 
 export default function Header() {
-  const { cartCtx, setIsHistoryCtx } = useContext(OrderContext);
+  const { cartCtx, setIsHistoryCtx, isHistoryCtx } = useContext(OrderContext);
   const dialog = useRef();
 
   const totQuantity = cartCtx.reduce((acc, obj) => {
@@ -36,6 +36,7 @@ export default function Header() {
             onClick={() => handleOpenCartClick()}
             text={`Cart(${totQuantity})`}
             btnStyle="btn-cart"
+            disabled={isHistoryCtx ? true : false}
           />
         </div>
       </header>
