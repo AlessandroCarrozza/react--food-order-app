@@ -1,3 +1,3 @@
-export default function ErrorBox() {
-  return;
+export default function ErrorBox({ error }) {
+  return <div className="error">{error}</div>;
 }

@@ -54,9 +54,7 @@ button {
 }
 
 .btn-back {
-  position: absolute;
   background: none;
-  right: 0;
   font-size: 1.5rem;
 }
 
@@ -233,6 +231,19 @@ header h1 {
   width: 12rem;
   margin: 0 1rem 0.5rem 0;
   display: inline-block;
+}
+
+.checkout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.error {
+  text-align: center;
+  background-color: #f44336;
+  color: white;
+  padding: 0.5rem 0;
+  width: 100%;
 }
 
 /* h1 {

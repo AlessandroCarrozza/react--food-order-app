@@ -3,16 +3,13 @@ import Button from "../ui/Button";
 import Input from "../ui/Input";
 import { OrderContext } from "../../store/food-order-context";
 import { sendUserOrder } from "../../http";
+import ErrorBox from "../ui/ErrorBox";
 
 export default function OrderForm({ onClose, totPrice, onForm }) {
-  const {
-    cartCtx,
-    setCartCtx,
-    errorCtx,
-    setErrorCtx,
-    setIsFetchingCtx,
-    isFetchingCtx,
-  } = useContext(OrderContext);
+  const { cartCtx, setCartCtx, setIsFetchingCtx, isFetchingCtx } =
+    useContext(OrderContext);
+
+  const [errorForm, setErrorForm] = useState();
 
   const fullName = useRef();
   const email = useRef();
@@ -33,33 +30,35 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       },
       totPrice: totPrice,
     };
-    console.log(orderDatas);
+    // console.log(orderDatas);
     setIsFetchingCtx(true);
     try {
       await sendUserOrder(orderDatas);
+      onForm(false);
+      setCartCtx([]);
+      onClose();
     } catch (error) {
-      setErrorCtx({
+      setErrorForm({
         message: error.message || "Failed to send order",
       });
     }
     setIsFetchingCtx(false);
-    onForm(false);
-    setCartCtx([]);
-    onClose();
   }
 
   return (
     <form id="order-form" onSubmit={handleSubmitOrder}>
       {isFetchingCtx ? "Loading" : ""}
-      {errorCtx ? errorCtx.message : ""}
-      <Button
-        onClick={() => {
-          onForm(false);
-        }}
-        text={<i className="fa-solid fa-backward"></i>}
-        btnStyle="btn-back"
-      />
-      <h1>Checkout</h1>
+      {errorForm ? <ErrorBox error={errorForm.message} /> : ""}
+      <div className="checkout">
+        <h1>Checkout</h1>
+        <Button
+          onClick={() => {
+            onForm(false);
+          }}
+          text={<i className="fa-solid fa-backward"></i>}
+          btnStyle="btn-back"
+        />
+      </div>
       <div>Total Amount: ${totPrice}</div>
 
       {/* inputs */}
