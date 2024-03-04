@@ -246,6 +246,10 @@ header h1 {
   width: 100%;
 }
 
+#success div {
+  text-align: right;
+}
+
 /* h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;

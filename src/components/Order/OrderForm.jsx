@@ -10,6 +10,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
     useContext(OrderContext);
 
   const [errorForm, setErrorForm] = useState();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const fullName = useRef();
   const email = useRef();
@@ -34,9 +35,10 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
     setIsFetchingCtx(true);
     try {
       await sendUserOrder(orderDatas);
-      onForm(false);
+      // onForm(false);
+      setIsSuccess(true);
       setCartCtx([]);
-      onClose();
+      // onClose();
     } catch (error) {
       setErrorForm({
         message: error.message || "Failed to send order",
@@ -46,46 +48,66 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
   }
 
   return (
-    <form id="order-form" onSubmit={handleSubmitOrder}>
-      {isFetchingCtx ? "Loading" : ""}
-      {errorForm ? <ErrorBox error={errorForm.message} /> : ""}
-      <div className="checkout">
-        <h1>Checkout</h1>
-        <Button
-          onClick={() => {
-            onForm(false);
-          }}
-          text={<i className="fa-solid fa-backward"></i>}
-          btnStyle="btn-back"
-        />
-      </div>
-      <div>Total Amount: ${totPrice}</div>
+    <div>
+      {!isSuccess ? (
+        <form id="order-form" onSubmit={handleSubmitOrder}>
+          {isFetchingCtx ? "Loading" : ""}
+          {errorForm ? <ErrorBox error={errorForm.message} /> : ""}
+          <div className="checkout">
+            <h1>Checkout</h1>
+            <Button
+              onClick={() => {
+                onForm(false);
+              }}
+              text={<i className="fa-solid fa-backward"></i>}
+              btnStyle="btn-back"
+            />
+          </div>
+          <div>Total Amount: ${totPrice}</div>
 
-      {/* inputs */}
-      <Input ref={fullName} label="Full Name" />
-      <Input ref={email} label="E-Email Address" type="email" />
-      <Input ref={street} label="Street" />
-      <div>
-        <Input
-          ref={postalCode}
-          inpStyle="user-detail short"
-          label="Postal Code"
-          name="postalCode"
-        />
-        <Input ref={city} inpStyle="user-detail short" label="City" />
-      </div>
+          {/* inputs */}
+          <Input ref={fullName} label="Full Name" />
+          <Input ref={email} label="E-Email Address" type="email" />
+          <Input ref={street} label="Street" />
+          <div>
+            <Input
+              ref={postalCode}
+              inpStyle="user-detail short"
+              label="Postal Code"
+              name="postalCode"
+            />
+            <Input ref={city} inpStyle="user-detail short" label="City" />
+          </div>
 
-      {/* buttons actions */}
-      <div className="cart-buttons">
-        <Button
-          text="Close"
-          onClick={() => {
-            onForm(false);
-            onClose();
-          }}
-        />
-        <Button text="Submit Order" btnStyle="btn-bg" type="submit" />
-      </div>
-    </form>
+          {/* buttons actions */}
+          <div className="cart-buttons">
+            <Button
+              text="Close"
+              onClick={() => {
+                onForm(false);
+                onClose();
+              }}
+            />
+            <Button text="Submit Order" btnStyle="btn-bg" type="submit" />
+          </div>
+        </form>
+      ) : (
+        <div id="success">
+          <h1>Success!</h1>
+          <p>Your order is your order is.</p>
+          <p>Thanks for your time, see you next time!</p>
+          <div>
+            <Button
+              text="Okay"
+              btnStyle="btn-bg"
+              onClick={() => {
+                onClose();
+                onForm(false);
+              }}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

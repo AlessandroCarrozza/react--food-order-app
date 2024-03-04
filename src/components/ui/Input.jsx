@@ -7,7 +7,13 @@ export default forwardRef(function Input(
   return (
     <div className={inpStyle}>
       <label>{label}</label>
-      <input ref={ref} {...props} placeholder="Type here..." type={type} />
+      <input
+        ref={ref}
+        {...props}
+        required
+        placeholder="Type here..."
+        type={type}
+      />
     </div>
   );
 });
