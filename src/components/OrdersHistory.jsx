@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchOrdersHistory } from "../http";
+import Button from "./ui/Button";
+import { OrderContext } from "../store/food-order-context";
 
 export default function OrdersHistory() {
+  const { setIsHistoryCtx } = useContext(OrderContext);
   const [ordersHistory, setOrdersHistory] = useState();
   const [errorHistory, setErrorHistory] = useState();
 
@@ -22,6 +25,11 @@ export default function OrdersHistory() {
   console.log(ordersHistory);
   return (
     <div>
+      <Button
+        text="Back to meals"
+        btnStyle="btn-bg"
+        onClick={() => setIsHistoryCtx(false)}
+      />
       {ordersHistory !== undefined
         ? ordersHistory.map((order) => (
             <ul key={order.id}>

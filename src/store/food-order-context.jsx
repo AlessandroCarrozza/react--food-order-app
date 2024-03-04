@@ -11,11 +11,14 @@ export const OrderContext = createContext({
   setIsFetchingCtx: () => {},
   errorCtx: null,
   setErrorCtx: () => {},
+  isHistoryCtx: null,
+  setIsHistoryCtx: () => {},
 });
 
 export default function OrderContextProvider({ children }) {
   const [availableMeals, setAvailableMeals] = useState([]);
   const [cart, setCart] = useState([]);
+  const [isHistory, setIsHistory] = useState(false);
 
   const [isFetching, setIsFetching] = useState();
   const [error, setError] = useState();
@@ -41,6 +44,8 @@ export default function OrderContextProvider({ children }) {
     setIsFetchingCtx: setIsFetching,
     errorCtx: error,
     setErrorCtx: setError,
+    isHistoryCtx: isHistory,
+    setIsHistoryCtx: setIsHistory,
   };
   return (
     <OrderContext.Provider value={ctxValue}>{children}</OrderContext.Provider>

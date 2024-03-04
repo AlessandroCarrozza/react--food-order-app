@@ -14,6 +14,7 @@ export default function MealsCardsList() {
     setErrorCtx,
     isFetchingCtx,
     setIsFetchingCtx,
+    isHistoryCtx,
   } = useContext(OrderContext);
 
   useEffect(() => {
@@ -36,14 +37,19 @@ export default function MealsCardsList() {
 
   return (
     <>
-      <OrdersHistory />
-      <ul id="food-cards-list">
-        {errorCtx ? <p>{errorCtx.message}</p> : ""}
-        {isFetchingCtx && <p>Loading...</p>}
-        {availableMealsCtx.map((meal) => (
-          <MealCard key={meal.id} meal={meal} img={meal.image} />
-        ))}
-      </ul>
+      <div>
+        {!isHistoryCtx ? (
+          <ul id="food-cards-list">
+            {errorCtx ? <p>{errorCtx.message}</p> : ""}
+            {isFetchingCtx && <p>Loading...</p>}
+            {availableMealsCtx.map((meal) => (
+              <MealCard key={meal.id} meal={meal} img={meal.image} />
+            ))}
+          </ul>
+        ) : (
+          <OrdersHistory />
+        )}
+      </div>
     </>
   );
 }
