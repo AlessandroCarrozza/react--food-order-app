@@ -44,7 +44,7 @@ export default function OrdersHistory() {
                 <th>Order ID</th>
                 <th>Customer</th>
                 <th>Destination</th>
-                <th>Meals</th>
+                <th>Food</th>
                 <th>Total Price</th>
               </tr>
             </thead>

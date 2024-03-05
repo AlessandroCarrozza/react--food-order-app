@@ -9,8 +9,8 @@ export const OrderContext = createContext({
   setCartCtx: () => {},
   isFetchingCtx: null,
   setIsFetchingCtx: () => {},
-  errorCtx: null,
-  setErrorCtx: () => {},
+  errorAvailableCtx: null,
+  setErrorAvailableCtx: () => {},
   isHistoryCtx: null,
   setIsHistoryCtx: () => {},
 });
@@ -21,7 +21,7 @@ export default function OrderContextProvider({ children }) {
   const [isHistory, setIsHistory] = useState(false);
 
   const [isFetching, setIsFetching] = useState();
-  const [error, setError] = useState();
+  const [errorAvailable, setErrorAvailable] = useState();
 
   function addToCart(meal) {
     const newMeal = updateMeal(cart, availableMeals, meal); // reduce function imported
@@ -42,8 +42,8 @@ export default function OrderContextProvider({ children }) {
     setCartCtx: setCart,
     isFetchingCtx: isFetching,
     setIsFetchingCtx: setIsFetching,
-    errorCtx: error,
-    setErrorCtx: setError,
+    errorAvailableCtx: errorAvailable,
+    setErrorAvailableCtx: setErrorAvailable,
     isHistoryCtx: isHistory,
     setIsHistoryCtx: setIsHistory,
   };
