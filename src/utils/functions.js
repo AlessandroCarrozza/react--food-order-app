@@ -2,6 +2,7 @@
 export function updateMeal(array, availablesArray, meal) {
   const newMeal = array.reduce(
     (acc, obj) => {
+      // if the selected meal is already in the cart
       if (obj.name === meal.name) {
         acc.quantity += obj.quantity;
         // for getting and add the single price from the chosen meal

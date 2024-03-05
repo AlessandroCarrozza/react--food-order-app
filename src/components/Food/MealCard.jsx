@@ -1,21 +1,29 @@
 import { OrderContext } from "../../store/food-order-context";
-import { findMeal } from "../../util/functions";
+import { findMeal } from "../../utils/functions";
 import Button from "../ui/Button";
 import { useContext } from "react";
 
-export default function MealCard({ meal, img }) {
+export default function MealCard({ availableMeal, img }) {
+  // context
   const { addToCartCtx, cartCtx } = useContext(OrderContext);
-  const foundMeal = findMeal(cartCtx, meal.name);
-  const cartMeal = foundMeal === undefined ? meal : foundMeal;
+
+  // check if the selected meal is already in the cart
+  const mealFromCart = findMeal(cartCtx, availableMeal.name);
+
+  // if there is not mealFromCart, take the available meal with the same name
+  const cartMeal = mealFromCart === undefined ? availableMeal : mealFromCart;
+  // console.log(mealFromCart);
+  // console.log(availableMeal);
   return (
     <li className="food-card">
-      <img src={`../../../backend/public/${img}`} alt={meal.name} />
+      <img src={`../../../backend/public/${img}`} alt={availableMeal.name} />
       <div className="food-info">
-        <h3>{meal.name}</h3>
+        <h3>{availableMeal.name}</h3>
         <div className="price">
-          <span>${meal.price}</span>
+          <span>${availableMeal.price}</span>
         </div>
-        <p>{meal.description}</p>
+        <p>{availableMeal.description}</p>
+
         <Button
           onClick={() => addToCartCtx(cartMeal)}
           text="Add to Cart"

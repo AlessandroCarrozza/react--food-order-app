@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { filterMeals, updateMeal } from "../util/functions";
+import { filterMeals, updateMeal } from "../utils/functions";
 
 export const OrderContext = createContext({
   availableMealsCtx: [],
@@ -9,8 +9,6 @@ export const OrderContext = createContext({
   setCartCtx: () => {},
   isFetchingCtx: null,
   setIsFetchingCtx: () => {},
-  errorAvailableCtx: null,
-  setErrorAvailableCtx: () => {},
   isHistoryCtx: null,
   setIsHistoryCtx: () => {},
 });
@@ -21,8 +19,8 @@ export default function OrderContextProvider({ children }) {
   const [isHistory, setIsHistory] = useState(false);
 
   const [isFetching, setIsFetching] = useState();
-  const [errorAvailable, setErrorAvailable] = useState();
 
+  // add to cart for the + cart & card button
   function addToCart(meal) {
     const newMeal = updateMeal(cart, availableMeals, meal); // reduce function imported
     setCart((prevMeals) => {
@@ -42,8 +40,6 @@ export default function OrderContextProvider({ children }) {
     setCartCtx: setCart,
     isFetchingCtx: isFetching,
     setIsFetchingCtx: setIsFetching,
-    errorAvailableCtx: errorAvailable,
-    setErrorAvailableCtx: setErrorAvailable,
     isHistoryCtx: isHistory,
     setIsHistoryCtx: setIsHistory,
   };

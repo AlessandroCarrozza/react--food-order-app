@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import CartItem from "./CartItem";
 
 export default function Cart({ onClose, totPrice, onForm }) {
+  // context
   const { cartCtx } = useContext(OrderContext);
 
   // alphabetic sorted x name

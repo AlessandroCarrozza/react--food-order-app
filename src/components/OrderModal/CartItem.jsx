@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
-import { filterMeals, findMeal } from "../../util/functions";
+import { filterMeals, findMeal } from "../../utils/functions";
 
 export default function CartItem({ meal }) {
+  // context
   const { addToCartCtx, setCartCtx, availableMealsCtx } =
     useContext(OrderContext);
 

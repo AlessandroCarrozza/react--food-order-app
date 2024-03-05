@@ -4,22 +4,27 @@ import Input from "../ui/Input";
 import { OrderContext } from "../../store/food-order-context";
 import { sendUserOrder } from "../../http";
 import ErrorBox from "../ui/ErrorBox";
+import Success from "./Success";
 
 export default function OrderForm({ onClose, totPrice, onForm }) {
+  // context
   const { cartCtx, setCartCtx, setIsFetchingCtx, isFetchingCtx } =
     useContext(OrderContext);
 
-  const [errorForm, setErrorForm] = useState();
-  const [isSuccess, setIsSuccess] = useState(false);
+  // success or error unique state
+  const [isSuccess, setIsSuccess] = useState({ result: false, error: "" });
 
+  // input refs
   const fullName = useRef();
   const email = useRef();
   const street = useRef();
   const postalCode = useRef();
   const city = useRef();
 
+  // customer details form submit
   async function handleSubmitOrder(event) {
     event.preventDefault();
+    // object to send to backend
     const orderDatas = {
       items: [...cartCtx],
       customer: {
@@ -31,36 +36,44 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       },
       totPrice: totPrice,
     };
-    // console.log(orderDatas);
+    // loading on
     setIsFetchingCtx(true);
     try {
-      await sendUserOrder(orderDatas);
-      setIsSuccess(true);
+      await sendUserOrder(orderDatas); // fetch sending function
+      setIsSuccess({
+        result: true,
+        error: null,
+      });
+      // reset cart post sending
       setCartCtx([]);
     } catch (error) {
-      setErrorForm({
-        message: error.message || "Failed to send order",
+      setIsSuccess({
+        result: false,
+        error: error.message || "Failed to send order",
       });
     }
+    // loading off
     setIsFetchingCtx(false);
   }
 
   return (
     <div>
-      {!isSuccess ? (
+      {/* isSuccess true, show Success comp */}
+      {!isSuccess.result ? (
+        // customer details form
         <form id="order-form" onSubmit={handleSubmitOrder}>
           {isFetchingCtx ? "Loading" : ""}
-          {errorForm ? <ErrorBox error={errorForm.message} /> : ""}
+          {isSuccess.error ? <ErrorBox error={isSuccess.error} /> : ""}
+
           <div className="checkout">
             <h1>Checkout</h1>
             <Button
-              onClick={() => {
-                onForm(false);
-              }}
+              onClick={() => onForm(false)}
               text={<i className="fa-solid fa-backward"></i>}
               btnStyle="btn-back"
             />
           </div>
+
           <div>Total Amount: ${totPrice}</div>
 
           {/* inputs */}
@@ -72,7 +85,6 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
               ref={postalCode}
               inpStyle="user-detail short"
               label="Postal Code"
-              name="postalCode"
             />
             <Input ref={city} inpStyle="user-detail short" label="City" />
           </div>
@@ -90,21 +102,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
           </div>
         </form>
       ) : (
-        <div id="success">
-          <h1>Success!</h1>
-          <p>Your order is your order is.</p>
-          <p>Thanks for your time, see you next time!</p>
-          <div>
-            <Button
-              text="Okay"
-              btnStyle="btn-bg"
-              onClick={() => {
-                onClose();
-                onForm(false);
-              }}
-            />
-          </div>
-        </div>
+        <Success onClose={onClose} onForm={onForm} />
       )}
     </div>
   );

@@ -1,0 +1,26 @@
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+#header #logo {
+  display: flex;
+  align-items: center;
+}
+
+#header img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--main-col);
+}
+
+#header h1 {
+  display: inline-block;
+  text-transform: uppercase;
+  color: var(--main-col);
+  padding: 0 1rem;
+}

@@ -35,7 +35,7 @@ export default function MealsCardsList() {
             <ErrorBox error={error.message} />
           ) : (
             availableMeals.map((meal) => (
-              <MealCard key={meal.id} meal={meal} img={meal.image} />
+              <MealCard key={meal.id} availableMeal={meal} img={meal.image} />
             ))
           )}
         </ul>

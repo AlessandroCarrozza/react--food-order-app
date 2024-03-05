@@ -12,9 +12,13 @@ import { OrderContext } from "../../store/food-order-context";
 
 const Modal = forwardRef(function Modal({}, ref) {
   const [isOrderForm, setIsOrderForm] = useState(false);
+
   const dialog = useRef();
 
+  // context
   const { cartCtx } = useContext(OrderContext);
+
+  // tot cart price
   const totPrice = cartCtx.reduce((acc, obj) => acc + obj.price, 0).toFixed(2);
 
   useImperativeHandle(ref, () => {
@@ -30,6 +34,7 @@ const Modal = forwardRef(function Modal({}, ref) {
   }
 
   return createPortal(
+    // portal
     <dialog className="modal" ref={dialog}>
       {isOrderForm ? (
         <OrderForm

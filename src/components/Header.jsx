@@ -3,6 +3,7 @@ import Button from "./ui/Button";
 import { useContext, useRef } from "react";
 import Modal from "./OrderModal/Modal";
 import { OrderContext } from "../store/food-order-context";
+import styles from "./Header.module.css";
 
 export default function Header() {
   // context
@@ -24,7 +25,7 @@ export default function Header() {
   return (
     <>
       <Modal ref={dialog}></Modal>
-      <header>
+      <header id={styles.header}>
         <div id="logo">
           <img src={logo} alt="Logo" />
           <h1>reactfood</h1>
