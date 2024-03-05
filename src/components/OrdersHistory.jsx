@@ -3,33 +3,23 @@ import { fetchOrdersHistory } from "../http";
 import Button from "./ui/Button";
 import { OrderContext } from "../store/food-order-context";
 import ErrorBox from "./ui/ErrorBox";
+import { useFetch } from "../hooks/useFetch";
 
 export default function OrdersHistory() {
-  const { setIsHistoryCtx, setIsFetchingCtx, isFetchingCtx } =
-    useContext(OrderContext);
-  const [ordersHistory, setOrdersHistory] = useState();
-  const [errorHistory, setErrorHistory] = useState();
+  // context
+  const { setIsHistoryCtx } = useContext(OrderContext);
 
-  useEffect(() => {
-    async function getOrdersHistory() {
-      setIsFetchingCtx(true);
-      try {
-        const data = await fetchOrdersHistory();
-        console.log(data);
-        setOrdersHistory(data);
-      } catch (error) {
-        setErrorHistory({
-          message: error.message || "Failed to get available meals",
-        });
-      }
-      setIsFetchingCtx(false);
-    }
-    getOrdersHistory();
-  }, [fetchOrdersHistory]);
+  // custom hook for fetch orders history
+  const {
+    isFetching,
+    error,
+    fetchedData: ordersHistory,
+  } = useFetch(fetchOrdersHistory, []);
+
   console.log(ordersHistory);
   return (
     <div id="history">
-      {isFetchingCtx ? "Loading" : ""}
+      {isFetching ? "Loading" : ""}
       <Button
         text="Back to meals"
         btnStyle="btn-bg mb"
@@ -76,8 +66,8 @@ export default function OrdersHistory() {
         ) : (
           <p>No orders</p>
         )
-      ) : errorHistory ? (
-        <ErrorBox error={errorHistory.message} />
+      ) : error ? (
+        <ErrorBox error={error.message} />
       ) : (
         ""
       )}

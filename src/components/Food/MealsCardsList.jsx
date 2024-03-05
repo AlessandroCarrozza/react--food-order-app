@@ -25,23 +25,23 @@ export default function MealsCardsList() {
   }, [availableMeals]);
 
   return (
-    <>
-      <div>
-        {!isHistoryCtx ? (
-          <ul id="food-cards-list">
-            {isFetching && <p>Loading...</p>}
-            {error ? (
-              <ErrorBox error={error.message} />
-            ) : (
-              availableMeals.map((meal) => (
-                <MealCard key={meal.id} meal={meal} img={meal.image} />
-              ))
-            )}
-          </ul>
-        ) : (
-          <OrdersHistory />
-        )}
-      </div>
-    </>
+    <div>
+      {/* click or not click history */}
+      {!isHistoryCtx ? (
+        <ul id="food-cards-list">
+          {isFetching && <p>Loading...</p>}
+          {/* error or correct views */}
+          {error ? (
+            <ErrorBox error={error.message} />
+          ) : (
+            availableMeals.map((meal) => (
+              <MealCard key={meal.id} meal={meal} img={meal.image} />
+            ))
+          )}
+        </ul>
+      ) : (
+        <OrdersHistory />
+      )}
+    </div>
   );
 }
