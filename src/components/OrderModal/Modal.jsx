@@ -9,6 +9,7 @@ import {
 import Cart from "./Cart";
 import OrderForm from "./OrderForm";
 import { OrderContext } from "../../store/food-order-context";
+import styles from "./Modal.module.css";
 
 const Modal = forwardRef(function Modal({}, ref) {
   const [isOrderForm, setIsOrderForm] = useState(false);
@@ -35,7 +36,7 @@ const Modal = forwardRef(function Modal({}, ref) {
 
   return createPortal(
     // portal
-    <dialog className="modal" ref={dialog}>
+    <dialog className={styles.modal} ref={dialog}>
       {isOrderForm ? (
         <OrderForm
           onClose={closeModal}

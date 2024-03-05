@@ -5,6 +5,7 @@ import { OrderContext } from "../../store/food-order-context";
 import ErrorBox from "../ui/ErrorBox";
 import { useFetch } from "../../hooks/useFetch";
 import OrdersTable from "./OrdersTable";
+import styles from "./OrdersHistory.module.css";
 
 export default function OrdersHistory() {
   // context
@@ -27,7 +28,7 @@ export default function OrdersHistory() {
   );
 
   return (
-    <div id="history">
+    <div id={styles.history}>
       {isFetching ? "Loading" : ""}
       <Button
         text="Back to meals"

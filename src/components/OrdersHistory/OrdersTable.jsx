@@ -1,6 +1,8 @@
+import styles from "./OrdersTable.module.css";
+
 export default function OrdersTable({ ordersHistory }) {
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>Order ID</th>
@@ -12,7 +14,7 @@ export default function OrdersTable({ ordersHistory }) {
       </thead>
       <tbody>
         {ordersHistory.map((order) => (
-          <tr key={order.id} className="row">
+          <tr key={order.id} className={styles.row}>
             <td>{order.id}</td>
             <td>{order.customer.name}</td>
             <td>

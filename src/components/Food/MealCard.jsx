@@ -2,6 +2,7 @@ import { OrderContext } from "../../store/food-order-context";
 import { findMeal } from "../../utils/functions";
 import Button from "../ui/Button";
 import { useContext } from "react";
+import styles from "./MealCard.module.css";
 
 export default function MealCard({ availableMeal, img }) {
   // context
@@ -15,11 +16,11 @@ export default function MealCard({ availableMeal, img }) {
   // console.log(mealFromCart);
   // console.log(availableMeal);
   return (
-    <li className="food-card">
+    <li className={styles.foodCard}>
       <img src={`../../../backend/public/${img}`} alt={availableMeal.name} />
-      <div className="food-info">
+      <div className={styles.foodInfo}>
         <h3>{availableMeal.name}</h3>
-        <div className="price">
+        <div className={styles.price}>
           <span>${availableMeal.price}</span>
         </div>
         <p>{availableMeal.description}</p>

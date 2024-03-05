@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import { filterMeals, findMeal } from "../../utils/functions";
+import styles from "./CartItem.module.css";
 
 export default function CartItem({ meal }) {
   // context
@@ -33,7 +34,7 @@ export default function CartItem({ meal }) {
     });
   }
   return (
-    <li className="cart-row">
+    <li className={styles.cartRow}>
       <span>
         {meal.name} - {meal.quantity} x ${+meal.price.toFixed(2)}
       </span>

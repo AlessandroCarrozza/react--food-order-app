@@ -72,131 +72,8 @@ li {
   list-style: none;
 }
 
-/* LIST */
-#food-cards-list {
-  margin: auto;
-  max-width: 60rem;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 1rem 0;
-}
-
-/* SINGLE CARD */
-
-#food-cards-list .food-card {
-  width: calc(100% / 3 - 1rem);
-  height: 30rem;
-  margin: 0.5rem;
-  position: relative;
-}
-
-.food-card .food-info * {
-  text-align: center;
-}
-
-.food-card .food-info {
-  padding: 0 0.5rem 1rem;
-  background-color: #1d1a16;
-  height: 50%;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-}
-
-.food-card .price {
-  margin: auto;
-}
-
-.food-card .price span {
-  display: inline-block;
-  background-color: #312c1d;
-  color: #ffc404;
-  font-size: 0.9rem;
-  font-weight: bold;
-  padding: 0.5rem 2rem;
-  border-radius: 4px;
-}
-
-.food-card h3 {
-  margin: 0;
-  padding: 1rem 0;
-}
-
-.food-card p {
-  font-size: 0.9rem;
-  padding: 0 0.7rem;
-}
-
-.food-card img {
-  width: 100%;
-  height: 50%;
-  display: block;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-}
-
-.food-card button {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-/* MODAL  */
-.modal {
-  position: relative;
-  background-color: #e4ddd4;
-  border-radius: 6px;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  padding: 1rem;
-  width: 80%;
-  max-width: 40rem;
-  animation: fade-slide-up 0.3s ease-out forwards;
-}
-
-.modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.55);
-}
-
-/* CART */
-
-#cart-list {
-  padding: 0;
-}
-
-#cart-list .cart-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.totPrice {
-  text-align: right;
-  font-weight: 800;
-  font-size: 1.2rem;
-  padding-bottom: 1rem;
-}
-
-.cart-buttons {
-  text-align: right;
-}
-
-/* ORDER FORM */
-#order-form {
-  margin: 0.5rem 0;
-  display: flex;
-  flex-direction: column;
-}
-
-#order-form label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  display: block;
-}
-
-#order-form .user-detail {
-  padding: 1rem 0 0.2rem;
+.user-detail {
+  padding: 0.5rem 0;
 }
 
 .user-detail input {
@@ -215,10 +92,15 @@ li {
   display: inline-block;
 }
 
-.checkout {
-  display: flex;
-  justify-content: space-between;
-}
+/* LIST */
+
+/* SINGLE CARD */
+
+/* MODAL  */
+
+/* CART */
+
+/* ORDER FORM */
 
 .error {
   text-align: center;
@@ -233,49 +115,7 @@ li {
 }
 
 /* TABLE */
-#history {
-  max-width: 60rem;
-  margin: auto;
-}
 
-#history p {
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 0.5rem;
-  border: 1px solid #362f4b;
-  margin: 0;
-}
-
-table {
-  margin: 0 auto 1rem;
-  border-collapse: collapse;
-  width: 100%;
-  height: 100%;
-}
-
-table thead {
-  background-color: #362f4b;
-}
-
-table th {
-  padding: 1.2rem;
-}
-
-table td {
-  color: black;
-  padding: 1rem;
-  text-align: center;
-}
-
-/* Stilizzare le righe pari */
-tr.row:nth-child(even) {
-  background-color: #f2f2f2; /* Grigio chiaro */
-}
-
-/* Stilizzare le righe dispari */
-tr.row:nth-child(odd) {
-  background-color: #ffffff; /* Bianco */
-}
 /* h1 {
   font-family: 'Lato', sans-serif;
   font-weight: 700;

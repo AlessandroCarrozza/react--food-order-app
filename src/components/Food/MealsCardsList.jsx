@@ -6,6 +6,7 @@ import { OrderContext } from "../../store/food-order-context";
 import OrdersHistory from "../OrdersHistory/OrdersHistory";
 import ErrorBox from "../ui/ErrorBox";
 import { useFetch } from "../../hooks/useFetch";
+import styles from "./MealsCardsList.module.css";
 
 export default function MealsCardsList() {
   // context
@@ -28,7 +29,7 @@ export default function MealsCardsList() {
     <div>
       {/* click or not click history */}
       {!isHistoryCtx ? (
-        <ul id="food-cards-list">
+        <ul id={styles.foodCardsList}>
           {isFetching && <p>Loading...</p>}
           {/* error or correct views */}
           {error ? (

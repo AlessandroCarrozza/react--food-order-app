@@ -5,6 +5,7 @@ import { OrderContext } from "../../store/food-order-context";
 import { sendUserOrder } from "../../http";
 import ErrorBox from "../ui/ErrorBox";
 import Success from "./Success";
+import styles from "./OrderForm.module.css";
 
 export default function OrderForm({ onClose, totPrice, onForm }) {
   // context
@@ -61,11 +62,11 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       {/* isSuccess true, show Success comp */}
       {!isSuccess.result ? (
         // customer details form
-        <form id="order-form" onSubmit={handleSubmitOrder}>
+        <form id={styles.orderForm} onSubmit={handleSubmitOrder}>
           {isFetchingCtx ? "Loading" : ""}
           {isSuccess.error ? <ErrorBox error={isSuccess.error} /> : ""}
 
-          <div className="checkout">
+          <div className={styles.checkout}>
             <h1>Checkout</h1>
             <Button
               onClick={() => onForm(false)}
@@ -90,7 +91,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
           </div>
 
           {/* buttons actions */}
-          <div className="cart-buttons">
+          <div className={styles.cartButtons}>
             <Button
               text="Close"
               onClick={() => {

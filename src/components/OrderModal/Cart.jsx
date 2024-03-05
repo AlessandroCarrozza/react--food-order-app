@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import CartItem from "./CartItem";
+import styles from "./Cart.module.css";
 
 export default function Cart({ onClose, totPrice, onForm }) {
   // context
@@ -12,18 +13,18 @@ export default function Cart({ onClose, totPrice, onForm }) {
   // console.log(sortedCartMeals);
 
   return (
-    <div id="cart">
+    <div id={styles.cart}>
       <h2>Your Cart</h2>
       {/* ordering meals list */}
-      <ul id="cart-list">
+      <ul id={styles.cartList}>
         {sortedCartMeals.map((meal) => (
           <CartItem key={meal.name} meal={meal} />
         ))}
       </ul>
 
-      <div className="totPrice">${totPrice}</div>
+      <div className={styles.totPrice}>${totPrice}</div>
 
-      <div className="cart-buttons">
+      <div className={styles.cartButtons}>
         <Button onClick={() => onClose()} text="Close" />
         {cartCtx.length > 0 && (
           <Button
