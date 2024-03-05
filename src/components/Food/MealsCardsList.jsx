@@ -3,7 +3,7 @@ import { fetchAvailableFood } from "../../http";
 import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { OrderContext } from "../../store/food-order-context";
-import OrdersHistory from "../OrdersHistory";
+import OrdersHistory from "../OrdersHistory/OrdersHistory";
 import ErrorBox from "../ui/ErrorBox";
 import { useFetch } from "../../hooks/useFetch";
 
