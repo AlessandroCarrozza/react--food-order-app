@@ -5,47 +5,35 @@ import { useEffect } from "react";
 import { OrderContext } from "../../store/food-order-context";
 import OrdersHistory from "../OrdersHistory";
 import ErrorBox from "../ui/ErrorBox";
+import { useFetch } from "../../hooks/useFetch";
 
 export default function MealsCardsList() {
   // context
-  const {
-    availableMealsCtx,
-    setAvailableMealsCtx,
-    errorAvailableCtx,
-    setErrorAvailableCtx,
-    isFetchingCtx,
-    setIsFetchingCtx,
-    isHistoryCtx,
-  } = useContext(OrderContext);
+  const { setAvailableMealsCtx, isHistoryCtx } = useContext(OrderContext);
 
+  // custom hook for fetch available meals
+  const {
+    isFetching,
+    error,
+    fetchedData: availableMeals,
+  } = useFetch(fetchAvailableFood, []);
+
+  // add availablesMeals to the context, updating the state
+  // when the fetch function ends, the re-render actives this
   useEffect(() => {
-    async function getAvailableFood() {
-      setIsFetchingCtx(true);
-      try {
-        const data = await fetchAvailableFood();
-        console.log(data);
-        setAvailableMealsCtx(data);
-      } catch (error) {
-        console.log(error.message);
-        setErrorAvailableCtx({
-          message: error.message || "Failed to get available meals",
-        });
-      }
-      setIsFetchingCtx(false);
-    }
-    getAvailableFood();
-  }, []);
+    setAvailableMealsCtx(availableMeals);
+  }, [availableMeals]);
 
   return (
     <>
       <div>
         {!isHistoryCtx ? (
           <ul id="food-cards-list">
-            {isFetchingCtx && <p>Loading...</p>}
-            {errorAvailableCtx ? (
-              <ErrorBox error={errorAvailableCtx.message} />
+            {isFetching && <p>Loading...</p>}
+            {error ? (
+              <ErrorBox error={error.message} />
             ) : (
-              availableMealsCtx.map((meal) => (
+              availableMeals.map((meal) => (
                 <MealCard key={meal.id} meal={meal} img={meal.image} />
               ))
             )}
