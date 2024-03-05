@@ -35,10 +35,8 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
     setIsFetchingCtx(true);
     try {
       await sendUserOrder(orderDatas);
-      // onForm(false);
       setIsSuccess(true);
       setCartCtx([]);
-      // onClose();
     } catch (error) {
       setErrorForm({
         message: error.message || "Failed to send order",
