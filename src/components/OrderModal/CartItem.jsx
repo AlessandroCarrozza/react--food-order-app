@@ -3,11 +3,14 @@ import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import { filterMeals, findMeal } from "../../utils/functions";
 import styles from "./CartItem.module.css";
+import { log } from "../../log";
 
 export default function CartItem({ meal }) {
   // context
   const { addToCartCtx, setCartCtx, availableMealsCtx } =
     useContext(OrderContext);
+
+  log("<CartItem /> rendered", 5);
 
   // remove meal function
   function removeFromCart(meal) {

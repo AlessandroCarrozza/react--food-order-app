@@ -4,12 +4,15 @@ import { useContext, useRef } from "react";
 import Modal from "./OrderModal/Modal";
 import { OrderContext } from "../store/food-order-context";
 import styles from "./Header.module.css";
+import { log } from "../log";
 
 export default function Header() {
   // context
   const { cartCtx, setIsHistoryCtx, isHistoryCtx } = useContext(OrderContext);
 
   const dialog = useRef();
+
+  log("<Header /> rendered", 2);
 
   // tot quantity meals for cart
   const totQuantity = cartCtx.reduce((acc, obj) => {

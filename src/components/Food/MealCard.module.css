@@ -1,5 +1,5 @@
 .foodCard {
-  width: calc(100% / 3 - 1rem);
+  width: calc(60rem / 3 - 1rem);
   height: 30rem;
   margin: 0.5rem;
   position: relative;

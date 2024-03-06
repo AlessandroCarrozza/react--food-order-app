@@ -3,13 +3,20 @@ import { findMeal } from "../../utils/functions";
 import Button from "../ui/Button";
 import { useContext } from "react";
 import styles from "./MealCard.module.css";
+import { useMemo } from "react";
+import { log } from "../../log";
 
 export default function MealCard({ availableMeal, img }) {
   // context
   const { addToCartCtx, cartCtx } = useContext(OrderContext);
 
+  log("<MealCard /> rendered", 3);
+
   // check if the selected meal is already in the cart
-  const mealFromCart = findMeal(cartCtx, availableMeal.name);
+  const mealFromCart = useMemo(
+    () => findMeal(cartCtx, availableMeal.name),
+    [cartCtx, availableMeal]
+  );
 
   // if there is not mealFromCart, take the available meal with the same name
   const cartMeal = mealFromCart === undefined ? availableMeal : mealFromCart;

@@ -6,10 +6,13 @@ import ErrorBox from "../ui/ErrorBox";
 import { useFetch } from "../../hooks/useFetch";
 import OrdersTable from "./OrdersTable";
 import styles from "./OrdersHistory.module.css";
+import { log } from "../../log";
 
 export default function OrdersHistory() {
   // context
   const { setIsHistoryCtx } = useContext(OrderContext);
+
+  log("<OrdersHistory /> rendered", 3);
 
   // custom hook for fetch orders history
   const {

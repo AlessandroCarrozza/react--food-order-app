@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import { filterMeals, updateMeal } from "../utils/functions";
+import { log } from "../log";
 
 export const OrderContext = createContext({
   availableMealsCtx: [],
@@ -7,8 +8,6 @@ export const OrderContext = createContext({
   cartCtx: [],
   addToCartCtx: () => {},
   setCartCtx: () => {},
-  isFetchingCtx: null,
-  setIsFetchingCtx: () => {},
   isHistoryCtx: null,
   setIsHistoryCtx: () => {},
 });
@@ -18,19 +17,22 @@ export default function OrderContextProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [isHistory, setIsHistory] = useState(false);
 
-  const [isFetching, setIsFetching] = useState();
+  log("<Context /> rendered", 1);
 
   // add to cart for the + cart & card button
-  function addToCart(meal) {
-    const newMeal = updateMeal(cart, availableMeals, meal); // reduce function imported
-    setCart((prevMeals) => {
-      // remove multiple objects meal with filter
-      const updatedMeals = filterMeals(prevMeals, newMeal);
-      return [...updatedMeals, { ...newMeal }];
-    });
-  }
+  const addToCart = useCallback(
+    (meal) => {
+      const newMeal = updateMeal(cart, availableMeals, meal); // reduce function imported
+      setCart((prevMeals) => {
+        // remove multiple objects meal with filter
+        const updatedMeals = filterMeals(prevMeals, newMeal);
+        return [...updatedMeals, { ...newMeal }];
+      });
+    },
+    [cart]
+  );
 
-  console.log(cart);
+  // console.log(cart);
 
   const ctxValue = {
     availableMealsCtx: availableMeals,
@@ -38,8 +40,6 @@ export default function OrderContextProvider({ children }) {
     cartCtx: cart,
     addToCartCtx: addToCart,
     setCartCtx: setCart,
-    isFetchingCtx: isFetching,
-    setIsFetchingCtx: setIsFetching,
     isHistoryCtx: isHistory,
     setIsHistoryCtx: setIsHistory,
   };

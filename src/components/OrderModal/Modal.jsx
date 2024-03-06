@@ -10,9 +10,12 @@ import Cart from "./Cart";
 import OrderForm from "./OrderForm";
 import { OrderContext } from "../../store/food-order-context";
 import styles from "./Modal.module.css";
+import { log } from "../../log";
 
 const Modal = forwardRef(function Modal({}, ref) {
   const [isOrderForm, setIsOrderForm] = useState(false);
+
+  log("<Modal /> rendered", 3);
 
   const dialog = useRef();
 

@@ -6,14 +6,17 @@ import { sendUserOrder } from "../../http";
 import ErrorBox from "../ui/ErrorBox";
 import Success from "./Success";
 import styles from "./OrderForm.module.css";
+import { log } from "../../log";
 
 export default function OrderForm({ onClose, totPrice, onForm }) {
+  const [isFetching, setIsFetching] = useState(false);
   // context
-  const { cartCtx, setCartCtx, setIsFetchingCtx, isFetchingCtx } =
-    useContext(OrderContext);
+  const { cartCtx, setCartCtx } = useContext(OrderContext);
 
   // success or error unique state
   const [isSuccess, setIsSuccess] = useState({ result: false, error: "" });
+
+  log("<OrderForm /> rendered", 4);
 
   // input refs
   const fullName = useRef();
@@ -38,7 +41,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       totPrice: totPrice,
     };
     // loading on
-    setIsFetchingCtx(true);
+    setIsFetching(true);
     try {
       await sendUserOrder(orderDatas); // fetch sending function
       setIsSuccess({
@@ -54,7 +57,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       });
     }
     // loading off
-    setIsFetchingCtx(false);
+    setIsFetching(false);
   }
 
   return (
@@ -63,7 +66,7 @@ export default function OrderForm({ onClose, totPrice, onForm }) {
       {!isSuccess.result ? (
         // customer details form
         <form id={styles.orderForm} onSubmit={handleSubmitOrder}>
-          {isFetchingCtx ? "Loading" : ""}
+          {isFetching ? "Loading" : ""}
           {isSuccess.error ? <ErrorBox error={isSuccess.error} /> : ""}
 
           <div className={styles.checkout}>

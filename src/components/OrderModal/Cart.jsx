@@ -3,10 +3,13 @@ import { OrderContext } from "../../store/food-order-context";
 import Button from "../ui/Button";
 import CartItem from "./CartItem";
 import styles from "./Cart.module.css";
+import { log } from "../../log";
 
 export default function Cart({ onClose, totPrice, onForm }) {
   // context
   const { cartCtx } = useContext(OrderContext);
+
+  log("<Cart /> rendered", 4);
 
   // alphabetic sorted x name
   const sortedCartMeals = cartCtx.sort((a, b) => a.name.localeCompare(b.name));

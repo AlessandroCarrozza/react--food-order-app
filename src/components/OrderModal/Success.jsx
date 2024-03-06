@@ -1,6 +1,8 @@
 import Button from "../ui/Button";
+import { log } from "../../log";
 
 export default function Success({ onClose, onForm }) {
+  log("<Success /> rendered", 5);
   return (
     <div id="success">
       <h1>Success!</h1>
